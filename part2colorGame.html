@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Colour Game</title>
+</head>
+<body>
+
+
+
+<script type="text/javascript">
+	
+	var colorArr = ['aliceblue','beige','blue','darkred','indigo','aqua','lime', 'peru'].sort();
+	var randomNum = Math.round(Math.random() * colorArr.length);
+	var colorTarget = colorArr[randomNum];
+	var gameFinished = false;
+	alert(colorTarget)
+	var guessInput = prompt('I\'m thinking of one of these colors:\n' + colorArr + '.\nWhat color am I thinking of?');
+	var count = 1;
+	var backgroundColor = document.getElementsByTagName("body")[0];
+
+function checkGuess(){
+	var guess = guessInput.toLowerCase();
+	//first check if guess is in color array
+	if (colorArr.includes(guess)) {
+		//check if correct
+		if (colorTarget === guess) {
+			backgroundColor.style.background = colorTarget;
+			gameFinished = true;
+			alert('Correct. It took ' + count + ' guess' + (count > 1 ? 'es': '') + '.\nYou can see the color in the background.');
+			return true;
+		} else if(guess < colorTarget){
+			count++;
+			alert('Your color is lower.')
+			guessInput = prompt('I\'m thinking of one of these colors:\n' + colorArr + '.\nWhat color am I thinking of?');
+			
+		} else if(guess > colorTarget){
+			count++;
+			alert('Your color is higher.')
+			guessInput = prompt('I\'m thinking of one of these colors:\n' + colorArr + '.\nWhat color am I thinking of?');
+		}//else if guess isnt in array 
+	} else {
+		alert('I don\'t recognise.')
+		guessInput = prompt('I\'m thinking of one of these colors:\n' + colorArr + '.\nWhat color am I thinking of?');
+	}
+}
+
+function game(){
+	while(gameFinished === false){
+		checkGuess();
+	}
+}
+
+game()
+	 
+
+</script>
+</body>
+</html>
